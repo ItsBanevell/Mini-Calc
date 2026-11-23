@@ -1,0 +1,5 @@
+p = 2;
+print 10 - 3 - p;
+print 24 / 4 / p;
+print (10 + 5) * p;
+print 0;
