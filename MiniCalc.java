@@ -1,14 +1,14 @@
- import java.io.IOException;
- import java.io.PrintStream;
- import java.math.BigInteger;
- import java.nio.file.Files;
- import java.nio.file.InvalidPathException;
- import java.nio.file.Path ;
- import java.util.ArrayDeque;
- import java.util.ArrayList;
- import java.util.HashMap;
- import java.util.List;
- import java.util.Map;
+import java.io.IOException;
+import java.io.PrintStream;
+import java.math.BigInteger;
+import java.nio.file.Files;
+import java.nio.file.InvalidPathException;
+import java.nio.file.Path ;
+import java.util.ArrayDeque;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 public final class MiniCalc {
     public static void main(String[] args) {
