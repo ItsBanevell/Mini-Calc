@@ -1,0 +1,56 @@
+
+MINI-CALC – INSTALACIÓN Y EJECUCIÓN
+
+REQUISITOS
+
+- Windows.
+- Java JDK 17 o superior.
+- Archivos de entrada con extensión .calc.
+
+1. VERIFICAR JAVA
+
+Abrir una terminal y ejecutar:
+
+java -version
+
+Se debe contar con Java 17 o una versión superior.
+
+2. UBICAR EL PROYECTO
+
+Descargar o clonar el repositorio Mini-Calc y abrir una terminal dentro de la carpeta del proyecto, donde se encuentra MiniCalc.java.
+
+3. EJECUTAR EL ANALIZADOR
+
+Ejecutar el siguiente comando:
+
+java MiniCalc.java ejemplo.calc
+
+Este comando realiza el análisis léxico y sintáctico del archivo.
+
+4. EJECUTAR Y VISUALIZAR RESULTADOS
+
+Ejecutar:
+
+java MiniCalc.java ejemplo.calc --ejecutar
+
+Este comando permite ejecutar las operaciones del archivo y visualizar el resultado.
+
+5. EJECUTAR ARCHIVOS DE PRUEBA
+
+Para probar errores léxicos:
+
+java MiniCalc.java pruebas/error-lexico.calc
+
+Para probar errores sintácticos:
+
+java MiniCalc.java pruebas/error-sintactico.calc
+
+Para probar precedencia de operadores:
+
+java MiniCalc.java pruebas/precedencia.calc
+
+6. REPOSITORIO
+
+Repositorio GitHub:
+
+https://github.com/ItsBanevell/Mini-Calc
