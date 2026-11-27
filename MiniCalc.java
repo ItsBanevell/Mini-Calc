@@ -330,28 +330,49 @@ public final class MiniCalc {
         }
     }
 
-    private static BigInteger evaluar(List<Token> posfija, Map<String, BigInteger> variables) {
-        ArrayDeque<BigInteger> pila = new ArrayDeque<>();
-        for (Token token : posfija) {
-            switch (token.tipo()) {
-                case NUM -> pila.push(new BigInteger(token.lexema()));
-                case ID -> {
-                    BigInteger valor = variables.get(token.lexema());
-                    if (valor == null) {
-                        throw new ErrorMiniCalc(token, "Variable sin asignar: " + citar(token.lexema()) + ".");
-                    }
-                    pila.push(valor);
+private static BigInteger evaluar(List<Token> posfija, Map<String, BigInteger> variables) {
+    ArrayDeque<BigInteger> pila = new ArrayDeque<>();
+
+    for (Token token : posfija) {
+        switch (token.tipo()) {
+            case NUM -> pila.push(new BigInteger(token.lexema()));
+
+            case ID -> {
+                BigInteger valor = variables.get(token.lexema());
+                if (valor == null) {
+                    throw new ErrorMiniCalc(token,
+                            "Variable sin asignar: " + citar(token.lexema()) + ".");
                 }
-                case OP_ADD, OP_SUB, OP_MUL, OP_DIV -> {
-                    BigInteger derecha = pila.pop();
-                    BigInteger izquierda = pila.pop();
-                    pila.push(operar(token, izquierda, derecha));
-                }
-                default -> throw new IllegalStateException("Token inesperado en la expresión: " + token);
+                pila.push(valor);
             }
+
+            case OP_ADD, OP_SUB, OP_MUL, OP_DIV -> {
+                // Verifica que existan dos operandos antes de operar.
+                if (pila.size() < 2) {
+                    throw new ErrorMiniCalc(token,
+                            "Expresión inválida durante la evaluación.");
+                }
+
+                BigInteger derecha = pila.pop();
+                BigInteger izquierda = pila.pop();
+
+                pila.push(operar(token, izquierda, derecha));
+            }
+
+            default -> throw new IllegalStateException(
+                    "Token inesperado en la expresión: " + token);
         }
-        return pila.pop();
     }
+
+    // Verifica que la expresión haya generado un único resultado.
+    if (pila.size() != 1) {
+        Token referencia = posfija.get(posfija.size() - 1);
+        throw new ErrorMiniCalc(referencia,
+                "Expresión inválida durante la evaluación.");
+    }
+
+    return pila.pop();
+}
 
     private static BigInteger operar(Token operador, BigInteger izquierda, BigInteger derecha) {
         return switch (operador.tipo()) {
