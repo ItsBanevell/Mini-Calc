@@ -76,15 +76,17 @@ public final class MiniCalc {
         return "\"" + texto.replace("\\", "\\\\").replace("\"", "\\\"") + "\"";
     }
 
-    private static final class ErrorMiniCalc extends RuntimeException {
-        ErrorMiniCalc(int linea, int columna, String mensaje) {
-            super("Error [Línea %d, Columna %d]: %s".formatted(linea, columna, mensaje));
-        }
+private static final class ErrorMiniCalc extends RuntimeException {
+    private static final long serialVersionUID = 1L;
 
-        ErrorMiniCalc(Token token, String mensaje) {
-            this(token.linea(), token.columna(), mensaje);
-        }
+    ErrorMiniCalc(int linea, int columna, String mensaje) {
+        super("Error [Línea %d, Columna %d]: %s".formatted(linea, columna, mensaje));
     }
+
+    ErrorMiniCalc(Token token, String mensaje) {
+        this(token.linea(), token.columna(), mensaje);
+    }
+}
 
     private enum Estado {
         INICIO(null), FALLO(null), PALABRA_INVALIDA(null),
